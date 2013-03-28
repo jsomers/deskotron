@@ -10,7 +10,7 @@ The trouble is that I'm too lazy -- not too lazy to read, since reading is, [in 
 
 > The first thing that `deskotron` would do is catalog everything I want or ought to do. By this I mean he would keep track of every book, blog post, paper, essay, and article I should read; every errand I have to run; every work to-do; every side project I’ve got going or have said I’d start; every puzzle or problem I would like to solve; every game I enjoy playing; all of my appointments; every essay I should write; all of my e-mails and calls; every movie, TED talk, and stupid video I plan to watch; etc. In short, deskotron would create a massive database of activity-units-I-could-fill-my-day-with, or *tasklets*.
 
-The idea being that the best way to get a lot of things done is to get *one* thing done, and the best way to do that is to lower its "activation energy." So that's what deskotron does: it decides what you should do and it puts the damn thing in front of you.
+The idea being that the best way to get a lot of things done is to get *one* thing done, and the best way to do that is to lower its "activation energy." So that's what `deskotron` does: it decides what you should do and it puts the damn thing in front of you.
 
 That might help explain why I'm calling the attached script **deskotron.rb**. Here's how it works:
 
