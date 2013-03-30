@@ -8,10 +8,12 @@ I've long wanted something like what the President gets every morning: a dossier
 
 The trouble is in making such an eclectic collection available in the first place. I'm simply too lazy to curate a pile of good reading every day. And even if I could come up with the ideal selections -- a little Montaigne and McPhee today, some New Yorker and The Onion tomorrow -- it would seem to require carrying around a knapsack packed with books and magazines.
 
-This is why I'm building "deskotron," so called because I think of it as a kind of robotic workdesk, a program that decides what I should read next and puts the damn thing in front of me. Here's how it works:
+This is why I'm building "deskotron," a kind of robotic workdesk, a program that decides what I should read next and puts the damn thing in front of me. Here's how it works:
 
-1. I define sources of stuff-to-read. I've always been [obsessed](http://jsomers.net/blog/open-books) with making books easily accessible, and I've gotten very good at parsing and processing them. I can turn just about any book I'd like to read -- say, George Saunders's new *The Tenth of December* -- into a series of well-formatted HTML files, one for each chapter. Same for issues of magazines, or RSS feeds, or the collected works of a single author.
+1. I define sources of stuff-to-read. I've always been [obsessed](http://jsomers.net/blog/open-books) with making books easily accessible, and I've gotten very good at parsing and processing them. I can turn just about any book -- say, George Saunders's new *The Tenth of December* -- into a series of well-formatted HTML files, one for each chapter. Same for issues of magazines, or RSS feeds, or the collected works of a single author.
 
-2. Every morning I run a script at 5am (roughly when the President wakes up) to curate from these sources about 7,500 words worth of reading. I use the [Instapaper API](http://www.instapaper.com/api/full) to fill up a special queue just for today.
+2. Every morning I run a script at 5am to curate from these sources about 7,500 words worth of reading. I use the [Instapaper API](http://www.instapaper.com/api/full) to fill up a special queue just for today.
 
-3. In the time it takes me to get from my apartment to the subway for my morning commute -- which is about a two-minute walk -- Instapaper, with its fancy [geofencing capability](http://blog.instapaper.com/post/24293729146), has downloaded my dossier for the day and transformed it into an easily consumable queue of beautifully formatted text available on my phone, iPad, and computer. If I'd like, I can, with one click, print the whole thing out onto a small stack of real paper.
+3. In the time it takes me to get from my apartment to the subway for my morning commute -- which is about a two-minute walk -- Instapaper, with its fancy [geofencing capability](http://blog.instapaper.com/post/24293729146), downloads my dossier for the day and transforms it into an easily consumable queue of beautifully formatted text available on my phone, iPad, and computer. With one click I can even print it all out.
+
+It's like having a very good personal assistant. It's like being the President of the United States.
