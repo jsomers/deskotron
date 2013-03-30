@@ -1,8 +1,6 @@
-#!/Users/jsomers/.rvm/rubies/ruby-1.9.2-p290/bin/ruby
 require 'rubygems'
 require 'instapaper'
 require 'digest/sha1'
-require 'pry'
 
 class String
   def word_count
@@ -11,6 +9,10 @@ class String
   
   def chapter_number
     self[/.*?(\d+).*?$/, 1]
+  end
+  
+  def to_title
+    self.split('_').map(&:capitalize).join(' ')
   end
 end
 
@@ -27,15 +29,14 @@ Instapaper.configure do |config|
 end
 
 READ_TODAY_FOLDER_ID = Instapaper.folders.detect {|f| f.title == "Read Today"}.folder_id
-WORD_LIMIT = 10_000
+BOOKS_FOLDER = "/Users/jsomers/Desktop/books"
+WORD_LIMIT = 7_500
 
 # Figure out how many words are already in the "Read Today" list.
 def words_currently_in_folder
   bookmarks = Instapaper.bookmarks(folder_id: READ_TODAY_FOLDER_ID)
   bookmarks.inject(0) {|sum, b| sum += Instapaper.text(b["bookmark_id"]).word_count}
 end
-
-puts words_currently_in_folder
 
 # Gather words from the current HTML-ized book. Create Instapaper bookmarks from that.
 #  
@@ -48,10 +49,10 @@ puts words_currently_in_folder
 # => Change its extension to .zip.
 # => Move the index.html file to the current_book folder, and split it using the split_book.rb script,
 #    which takes a delimiter to split the book on (chapter heading, e.g.).
-def add_book_material(word_target)
+def add_book_material(directory, word_target)
   words_so_far = 0
-  chapters = Dir.glob('/Users/jsomers/Desktop/current_book/chapter_*.html').sort_by {|c| c.chapter_number.to_i }
-  raise "The book's done!" if chapters.empty?
+  chapters = Dir.glob("#{BOOKS_FOLDER}/#{directory}/chapter_*.html").sort_by {|c| c.chapter_number.to_i }
+  puts "You've finished #{directory.to_title}!" if chapters.empty?
   last_file = false
 
   while !last_file && words_so_far < word_target
@@ -61,16 +62,16 @@ def add_book_material(word_target)
 
     if content.word_count > words_to_work_with
       mark = 7 * words_to_work_with
-      File.open(chapter, "w") { |f| f.puts "..." + content[mark..-1]}
+      File.open(chapter, "w") { |f| f.puts "..." + content[mark - 500..-1]}
       content = content[0..mark] + "..."
       last_file = true
     end
   
-    puts "Adding #{last_file ? 'truncated' : 'complete'} version of Chapter #{chapter.chapter_number} to Instapaper (#{content.word_count} words)."
+    puts "Adding #{last_file ? 'truncated' : 'complete'} version of #{directory.to_title}: Chapter #{chapter.chapter_number} to Instapaper (#{content.word_count} words)."
     bogus_url = "http://jsomers.net/book-chapter/#{Digest::SHA1.hexdigest(content)}-#{Time.new.to_i}"
     r = Instapaper.add_bookmark(bogus_url, 
       is_private_set_to_source: "Book",
-      title: "Chapter #{chapter.chapter_number}",
+      title: "#{directory.to_title}: Chapter #{chapter.chapter_number}",
       folder_id: READ_TODAY_FOLDER_ID,
       content: content)
 
@@ -100,3 +101,18 @@ def add_instapaper_material(word_target)
     end
   end
 end
+
+BOOK_PROPORTION = 0.5
+BOOKS_WITH_PROPORTIONS = {"tenth_of_december" => 0.5, "how_to_be_alone" => 0.5}
+
+words_to_add = WORD_LIMIT - words_currently_in_folder
+
+BOOKS_WITH_PROPORTIONS.each do |book_dir, proportion|
+  words = words_to_add * BOOK_PROPORTION * proportion
+  puts "Adding book material: #{book_dir}, #{words} words."
+  add_book_material(book_dir, words)
+end
+
+words_for_instapaper = (1 - BOOK_PROPORTION) * words_to_add
+puts "Adding Instapaper material: #{words_for_instapaper} words"
+add_instapaper_material(words_for_instapaper)
