@@ -14,6 +14,6 @@ This is why I'm building "deskotron," a kind of robotic workdesk program that (a
 
 2. Every morning I run **deskotron.rb** at 5am to pull about 7,500 words from these sources, using proportions I define in advance (like "50% from this book, 25% from that one, 25% essays"). The program uses the [Instapaper API](http://www.instapaper.com/api/full) to fill up a special queue just for the day.
 
-3. In the time it takes me to get from my apartment to the subway for my morning commute -- which is about a two-minute walk -- Instapaper, with its fancy [geofencing capability](http://blog.instapaper.com/post/24293729146), downloads that day's dossier and transforms it into an easily consumable queue of beautifully formatted text available on my phone, iPad, and computer.
+3. In the time it takes me to get from my apartment to the subway for my morning commute, Instapaper, with its fancy [geofencing capability](http://blog.instapaper.com/post/24293729146), downloads that day's dossier and transforms it into an easily consumable queue of beautifully formatted text available on my phone, iPad, and computer.
 
 It's like having a very good personal assistant. It's like being the president.
